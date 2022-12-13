@@ -1,0 +1,12 @@
+version: '3'
+services:
+  myapp-main:
+    image: qap_test:latest
+    ports:
+      - 8080:8080
+    environment:
+      #      - spring.datasource.url=jdbc:mysql://localhost:3306/(test)---Schema Name
+#      - spring.datasource.url=jdbc:  //endpoint
+      - spring.datasource.password=
+      - spring.datasource.username=
+      - spring.datasource.driver-class-name=org.postgresql.Driver
