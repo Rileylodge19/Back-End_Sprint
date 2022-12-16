@@ -1,12 +1,12 @@
 version: '3'
 services:
   myapp-main:
-    image: qap_test:latest
+    image: zoopedia_db:latest
     ports:
       - 8080:8080
     environment:
       #      - spring.datasource.url=jdbc:mysql://localhost:3306/(test)---Schema Name
-#      - spring.datasource.url=jdbc:  //endpoint
-      - spring.datasource.password=
-      - spring.datasource.username=
-      - spring.datasource.driver-class-name=org.postgresql.Driver
+      - spring.datasource.url=jdbc:mysql://zoopedia.cqc7vc9z5mvk.us-east-1.rds.amazonaws.com/zoopedia
+      - spring.datasource.password=Password
+      - spring.datasource.username=admin
+      - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver

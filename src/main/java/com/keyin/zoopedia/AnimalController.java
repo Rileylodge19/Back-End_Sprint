@@ -11,12 +11,12 @@ public class AnimalController {
     @Autowired
     private AnimalRepository repo;
 
-    @GetMapping("/animals")
+    @GetMapping("/animal")
     public List<Animal> getAnimals(){return (List<Animal>) repo.findAll();}
 
-    @PostMapping("/animals")
+    @PostMapping("/animal")
     public void createAnimal(@RequestBody Animal animal){repo.save(animal);}
 
-    @DeleteMapping("/animals/{id}")
+    @DeleteMapping("/animal/{id}")
     public void deleteAnimal(@PathVariable Long id){repo.deleteById(id);}
 }
