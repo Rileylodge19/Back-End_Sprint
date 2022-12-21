@@ -4,12 +4,14 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Animal {
-    private @Id
-    @GeneratedValue Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String commonName;
     private String scientificName;
     private String animalDescription;
@@ -47,13 +49,6 @@ public class Animal {
                 Objects.equals(dateOfDiscovery, animal.dateOfDiscovery) &&
                 Objects.equals(countryOfOrigin, animal.countryOfOrigin) &&
                 Objects.equals(conservationStatus, animal.conservationStatus);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, commonName, scientificName, animalDescription, primaryDiet, dateOfDiscovery,
-                countryOfOrigin, conservationStatus);
     }
 
     public Long getId() {
