@@ -1,12 +1,6 @@
 package com.keyin.zoopedia;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.PostUpdate;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,23 +12,24 @@ public class AnimalController {
 
     // Update operation
 
-    @PutMapping("/update")
+    @PutMapping("/animals/{id}")
     @CrossOrigin
-    public void updateAnimal(@PathVariable String id, @RequestBody Animal animal, HttpServletResponse response) {
-        Optional<Animal> returnValue = repo.findById(Long.parseLong(id));
-        Animal animalToUpdate;
+    public void updateAnimal(@PathVariable("id") long id, @RequestBody Animal animal) {
+        Optional<Animal> returnValue = repo.findById(id);
+        Animal _animalToUpdate;
         if (returnValue.isPresent()) {
-            animalToUpdate = returnValue.get();
-            animalToUpdate.setId(animal.getId());
-            repo.save(animalToUpdate);
-        } else {
-            try {
-                response.sendError(404, "Animal with ID: " + animal.getId() + " not found.");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            _animalToUpdate = returnValue.get();
+            _animalToUpdate.setId(animal.getId());
+            _animalToUpdate.setCommonName(animal.getCommonName());
+            _animalToUpdate.setScientificName(animal.getScientificName());
+            _animalToUpdate.setAnimalDescription(animal.getAnimalDescription());
+            _animalToUpdate.setCountryOfOrigin(animal.getCountryOfOrigin());
+            _animalToUpdate.setDateOfDiscovery(animal.getDateOfDiscovery());
+            _animalToUpdate.setPrimaryDiet(animal.getPrimaryDiet());
+            _animalToUpdate.setConservationStatus(animal.getConservationStatus());
+            repo.save(_animalToUpdate);
         }
-    }
+        }
 
     @GetMapping("/animals")
     @CrossOrigin
